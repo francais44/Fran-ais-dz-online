@@ -1,0 +1,84 @@
+e.src = "NETEASE" === window.C_CAPTCHA_IMPLEMENTATION ? "https://cstaticdun.126.net/load.min.js" : "https://www.google.com/recaptcha/api.js",
+                                        e.async = !0,
+                                        e.defer = !0,
+                                        document.head.appendChild(e),
+                                        C = !0,
+                                        e.onload = "NETEASE" === window.C_CAPTCHA_IMPLEMENTATION ? ()=>{
+                                            var e;
+                                            null === (e = window.initNECaptcha) || void 0 === e || e.call(window, {
+                                                captchaId: window.C_CAPTCHA_KEY,
+                                                element: "#netease-captcha",
+                                                protocol: "https",
+                                                width: "auto",
+                                                onVerify: (e,t)=>{
+                                                    b = t.validate
+                                                }
+                                            })
+                                        }
+                                        : ()=>{}
+                                    }())
+                                }
+                                ,
+                                a.onclick = ()=>B(1),
+                                h && (h.onclick = ()=>B(1)),
+                                w.onclick = ()=>B(1),
+                                o.addEventListener("submit", (function(e) {
+                                    e.preventDefault(),
+                                    p.style.display = "none",
+                                    _.style.display = "none";
+                                    const t = function() {
+                                        let e = "";
+                                        const t = document.getElementsByName("report_reason");
+                                        for (let n = 0; n < t.length; n++) {
+                                            const o = t[n];
+                                            o.checked && (e = o.value)
+                                        }
+                                        return e
+                                    }()
+                                      , n = T();
+                                    if (!n)
+                                        return void (_.style.display = "block");
+                                    const o = {
+                                        reason: t,
+                                        challenge: n
+                                    }
+                                      , c = window.location.origin + window.location.pathname + "/_api/report";
+                                    r.classList.add("loading"),
+                                    fetch(c, {
+                                        method: "POST",
+                                        body: JSON.stringify(o),
+                                        headers: {
+                                            "Content-Type": "application/json; charset=utf-8"
+                                        }
+                                    }).then((e=>{
+                                        r.classList.remove("loading"),
+                                        e.ok ? B(3) : p.style.display = "block"
+                                    }
+                                    ))
+                                }
+                                ));
+                                const A = new Map
+                                  , L = e=>{
+                                    const t = A.get(e);
+                                    null != t && document.removeEventListener("keydown", t);
+                                    const n = e.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
+                                      , o = e
+                                      , c = n[n.length - 1]
+                                      , d = function(e) {
+                                        ("Tab" === e.key || 9 === e.keyCode) && (e.shiftKey ? document.activeElement === o && (c.focus(),
+                                        e.preventDefault()) : document.activeElement === c && (o.focus(),
+                                        e.preventDefault()))
+                                    };
+                                    A.set(e, d),
+                                    document.addEventListener("keydown", d),
+                                    o.focus()
+                                }
+                                ;
+                                e.keepFocus = L,
+                                Object.defineProperty(e, "__esModule", {
+                                    value: !0
+                                })
+                            }({});
+                        }
+                        )();
+  
